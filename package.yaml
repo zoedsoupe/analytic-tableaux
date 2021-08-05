@@ -1,0 +1,43 @@
+name:                analytic-tableaux
+version:             0.0.1
+github:              "matdsoupe/analytic-tableaux"
+license:             BSD3
+author:              "Matheus de Souza Pessanha"
+maintainer:          "matheus_pessanha2001@outlook.com"
+copyright:           "Matdsoupe"
+
+extra-source-files:
+- README.org
+
+# Metadata used when publishing your package
+synopsis:            Implementation of a analytic tableaux
+
+description:         Please see the README on GitHub at <https://github.com/matdsoupe/analytic-tableaux#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+
+executables:
+  analytic-tableaux-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - analytic-tableaux
+
+tests:
+  analytic-tableaux-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - analytic-tableaux
