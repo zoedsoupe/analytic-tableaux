@@ -1,6 +1,3 @@
-module Lib (
-    someFunc,
-) where
+module Lib (parseTableaux) where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+import Language.Tableaux.Parser
