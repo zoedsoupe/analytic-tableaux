@@ -7,6 +7,7 @@ mkShell {
 
   buildInputs = with haskellPackages; [
     ghc
+    ghcid
     stack
     hlint # style linter
     fourmolu # formatter
