@@ -18,12 +18,12 @@ data InputMetadata = InputMetadata
     deriving (Show)
 
 data Operator
-    = Not
-    | And
-    | Or
-    | Implies
-    | Equiv
-    | Prove
+    = Not Char
+    | And Char
+    | Or Char
+    | Implies Char
+    | Equiv Char
+    | Prove Char
     deriving (Show)
 
 data Sign = T | F deriving (Show)
@@ -34,6 +34,36 @@ data TableauxInput
     | TableauxOperator InputMetadata Operator
     | TableauxWff InputMetadata TableauxInput
     deriving (Show)
+
+parseNot :: Parser Operator
+parseNot = do
+    ch <- oneOf "¬~!"
+    return $ Not ch
+
+parseAnd :: Parser Operator
+parseAnd = do
+    ch <- oneOf "∧&·"
+    return $ And ch
+
+parseOr :: Parser Operator
+parseOr = do
+    ch <- oneOf "∨+∥"
+    return $ Or ch
+
+parseImplies :: Parser Operator
+parseImplies = do
+    ch <- oneOf "⇒→⊃"
+    return $ Implies ch
+
+parseEquiv :: Parser Operator
+parseEquiv = do
+    ch <- oneOf "⇔≡↔"
+    return $ Equiv ch
+
+parseProve :: Parser Operator
+parseProve = do
+    ch <- char '⊢'
+    return $ Prove ch
 
 getInputMetadata :: Parser InputMetadata
 getInputMetadata = do
@@ -59,5 +89,11 @@ parseSign = do
         'T' -> return $ TableauxSign meta T
         'F' -> return $ TableauxSign meta F
 
+parseOperator :: Parser TableauxInput
+parseOperator = do
+    meta <- getInputMetadata
+    op <- parseNot <|> parseAnd <|> parseOr <|> parseImplies <|> parseEquiv <|> parseProve
+    return $ TableauxOperator meta op
+
 parseTableaux :: Parser TableauxInput
-parseTableaux = parseAtom <|> parseSign
+parseTableaux = parseAtom <|> parseSign <|> parseOperator
