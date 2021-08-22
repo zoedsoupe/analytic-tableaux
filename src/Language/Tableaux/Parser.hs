@@ -2,7 +2,7 @@
 
 module Language.Tableaux.Parser where
 
-import Control.Applicative ((*>))
+import Control.Applicative ((*>), (<*))
 
 import Data.Text (Text)
 import qualified Data.Text as Text
@@ -83,5 +83,13 @@ parseOperator = do
     op <- parseNot <|> parseAnd <|> parseOr <|> parseImplies <|> parseEquiv <|> parseProve
     return $ TableauxOperator meta op
 
+parseWff :: Parser TableauxInput
+parseWff = do
+    meta <- getInputMetadata
+    char '('
+    scope <- spaces *> many parseTableaux <* spaces
+    char ')'
+    return $ TableauxWff meta scope
+
 parseTableaux :: Parser TableauxInput
-parseTableaux = parseAtom <|> parseSign <|> parseOperator
+parseTableaux = parseAtom <|> parseSign <|> parseOperator <|> parseWff
