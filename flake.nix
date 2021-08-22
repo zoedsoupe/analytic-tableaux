@@ -33,8 +33,12 @@
             stack
             hlint # style linter
             fourmolu # formatter
+            hspec # testing framework
+            hspec-parsec # expectations for testing parsers
             HUnit # unit test framework
             QuickCheck # property based test framework
+            quickcheck-unicode # gen unicode
+            prettyprinter # modern prettyprinter
           ];
           inputsFrom = builtins.attrValues self.packages.${system};
         };
