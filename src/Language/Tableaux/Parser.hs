@@ -32,38 +32,26 @@ data TableauxInput
     = TableauxAtom InputMetadata Text
     | TableauxSign InputMetadata Sign
     | TableauxOperator InputMetadata Operator
-    | TableauxWff InputMetadata TableauxInput
+    | TableauxWff InputMetadata [TableauxInput]
     deriving (Show)
 
 parseNot :: Parser Operator
-parseNot = do
-    ch <- oneOf "¬~!"
-    return $ Not ch
+parseNot = Not <$> oneOf "¬~!"
 
 parseAnd :: Parser Operator
-parseAnd = do
-    ch <- oneOf "∧&·"
-    return $ And ch
+parseAnd = And <$> oneOf "∧&·"
 
 parseOr :: Parser Operator
-parseOr = do
-    ch <- oneOf "∨+∥"
-    return $ Or ch
+parseOr = Or <$> oneOf "∨+∥"
 
 parseImplies :: Parser Operator
-parseImplies = do
-    ch <- oneOf "⇒→⊃"
-    return $ Implies ch
+parseImplies = Implies <$> oneOf "⇒→⊃"
 
 parseEquiv :: Parser Operator
-parseEquiv = do
-    ch <- oneOf "⇔≡↔"
-    return $ Equiv ch
+parseEquiv = Equiv <$> oneOf "⇔≡↔"
 
 parseProve :: Parser Operator
-parseProve = do
-    ch <- char '⊢'
-    return $ Prove ch
+parseProve = Prove <$> char '⊢'
 
 getInputMetadata :: Parser InputMetadata
 getInputMetadata = do
