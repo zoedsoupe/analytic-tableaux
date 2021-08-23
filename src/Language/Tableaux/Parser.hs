@@ -80,7 +80,7 @@ parseSign = do
 parseOperator :: Parser TableauxInput
 parseOperator = do
     meta <- getInputMetadata
-    op <- parseNot <|> parseAnd <|> parseOr <|> parseImplies <|> parseEquiv <|> parseProve
+    op <- spaces *> (parseNot <|> parseAnd <|> parseOr <|> parseImplies <|> parseEquiv <|> parseProve) <* spaces
     return $ TableauxOperator meta op
 
 parseWff :: Parser TableauxInput
