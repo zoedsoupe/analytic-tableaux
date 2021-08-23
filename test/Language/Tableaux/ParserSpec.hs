@@ -3,8 +3,8 @@ module Language.Tableaux.ParserSpec where
 import Data.Text (singleton)
 
 import Test.Hspec
-import Test.Hspec.QuickCheck
 import Test.Hspec.Parsec
+import Test.Hspec.QuickCheck
 import Test.QuickCheck
 import Test.QuickCheck.Unicode
 
@@ -13,13 +13,13 @@ import Text.Parsec (parse)
 import Language.Tableaux.Parser
 
 instance Arbitrary Sign where
-  arbitrary = chooseEnum (T, F)
+    arbitrary = chooseEnum (T, F)
 
 instance Arbitrary Operator where
-  arbitrary = intToOp <$> choose (1, 6)
+    arbitrary = intToOp <$> choose (1, 6)
 
 instance Arbitrary TableauxInput where
-  arbitrary = intToTableaux <$> choose (1, 4)
+    arbitrary = intToTableaux <$> choose (1, 4)
 
 main :: Spec
 main = undefined
