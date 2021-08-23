@@ -26,7 +26,7 @@ data Operator
     | Prove Char
     deriving (Show)
 
-data Sign = T | F deriving (Show)
+data Sign = T | F deriving (Show, Enum)
 
 data TableauxInput
     = TableauxAtom InputMetadata Text

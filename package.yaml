@@ -22,6 +22,7 @@ dependencies:
 - hspec
 - hspec-parsec
 - QuickCheck
+- quickcheck-unicode
 
 library:
   source-dirs: src
