@@ -39,7 +39,7 @@ library
     , hspec-parsec
     , parsec
     , prettyprinter
-    , quickcheck-unicode
+    , quickcheck-text
     , text
   default-language: Haskell2010
 
@@ -58,7 +58,7 @@ executable analytic-tableaux-exe
     , hspec-parsec
     , parsec
     , prettyprinter
-    , quickcheck-unicode
+    , quickcheck-text
     , text
   default-language: Haskell2010
 
@@ -79,6 +79,6 @@ test-suite analytic-tableaux-test
     , hspec-parsec
     , parsec
     , prettyprinter
-    , quickcheck-unicode
+    , quickcheck-text
     , text
   default-language: Haskell2010

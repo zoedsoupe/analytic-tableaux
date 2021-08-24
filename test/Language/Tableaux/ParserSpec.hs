@@ -6,7 +6,7 @@ import Test.Hspec
 import Test.Hspec.Parsec
 import Test.Hspec.QuickCheck
 import Test.QuickCheck
-import Test.QuickCheck.Unicode
+import Test.QuickCheck.Utf8 (genValidUtf8)
 
 import Text.Parsec (parse)
 
@@ -16,25 +16,24 @@ instance Arbitrary Sign where
     arbitrary = chooseEnum (T, F)
 
 instance Arbitrary Operator where
-    arbitrary = intToOp <$> choose (1, 6)
+    arbitrary = oneof
+      [ Not <$> elements "¬~!"
+      , And <$> elements "∧&·"
+      , Or <$> elements "∨+∥"
+      , Implies <$> elements "⇒→⊃"
+      , Equiv <$> elements "⇔≡↔"
+      , Prove <$> elements "⊢"
+      ]
 
 instance Arbitrary TableauxInput where
-    arbitrary = intToTableaux <$> choose (1, 4)
+    arbitrary = oneof
+      [ TableauxAtom <$> inputMetadata <*> genValidUtf8
+      , TableauxSign <$> inputMetadata <*> arbitrary
+      , TableauxOperator <$> inputMetadata <*> arbitrary
+      , TableauxWff <$> inputMetadata <*> arbitrary
+      ]
+      where
+        inputMetadata = InputMetadata <$> arbitrary <*> arbitrary
 
-main :: Spec
-main = undefined
-
-intToOp 1 = Not <$> elements "¬~!"
-intToOp 2 = And <$> elements "∧&·"
-intToOp 3 = Or <$> elements "∨+∥"
-intToOp 4 = Implies <$> elements "⇒→⊃"
-intToOp 5 = Equiv <$> elements "⇔≡↔"
-intToOp 6 = Prove <$> elements "⊢"
-
-intToTableaux 1 = TableauxAtom <$> inputMetadata <*> letter
-intToTableaux 2 = TableauxSign <$> inputMetadata <*> arbitrary
-intToTableaux 3 = TableauxOperator <$> inputMetadata <*> arbitrary
-intToTableaux 4 = TableauxWff <$> inputMetadata <*> arbitrary
-
-letter = frequency [(26, choose ('a', 'z'))]
-inputMetadata = InputMetadata <$> arbitrary <*> arbitrary
+spec :: Spec
+spec = undefined

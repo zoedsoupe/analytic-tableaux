@@ -22,7 +22,7 @@ dependencies:
 - hspec
 - hspec-parsec
 - QuickCheck
-- quickcheck-unicode
+- quickcheck-text
 
 library:
   source-dirs: src

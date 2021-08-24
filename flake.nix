@@ -37,7 +37,7 @@
             hspec-parsec # expectations for testing parsers
             HUnit # unit test framework
             QuickCheck # property based test framework
-            quickcheck-unicode # gen unicode
+            quickcheck-text # gen utf8 chars
             prettyprinter # modern prettyprinter
           ];
           inputsFrom = builtins.attrValues self.packages.${system};
