@@ -1,1 +1,20 @@
-#+title: Analytic Tableaux
+#+title: analytic tableaux 🌸
+
+omg hiiii!! this is my little haskell project for building an analytic tableaux theorem prover!! 💕
+
+basically i'm implementing the tableaux method - it's this super elegant way of checking if logical formulas are satisfiable by building these tree-like proof structures. it's like... formal logic but make it cute??
+
+right now the parser is working and it's SO flexible!! you can write logical formulas with all sorts of symbols:
+- negation: ¬, ~, !  
+- and: ∧, &, ·
+- or: ∨, +, ∥  
+- implies: ⇒, →, ⊃
+- equivalent: ⇔, ≡, ↔
+
+the whole thing parses your formulas into a nice ast and can pretty-print them back out. next step is implementing the actual tableaux algorithm to build proof trees!! 
+
+it's written in haskell because functional programming makes me happy and parsing combinators are *chef's kiss* ✨
+
+run it with: `cabal run analytic-tableaux "your formula here"`
+
+tests use quickcheck for property-based testing because we love robust code in this house!! 🏳️‍⚧️
